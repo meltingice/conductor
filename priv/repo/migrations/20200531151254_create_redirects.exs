@@ -6,7 +6,7 @@ defmodule Conductor.Repo.Migrations.CreateRedirects do
       add :id, :uuid, primary_key: true
       add :code, :string
       add :destination, :text
-      add :views, :integer
+      add :views, :integer, default: 0
 
       timestamps()
     end
