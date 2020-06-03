@@ -10,6 +10,10 @@ defmodule ConductorWeb.AuthController do
     render(conn, "login.html")
   end
 
+  def logout(conn, _params) do
+    conn |> UserAuth.logout_user() |> redirect(to: Routes.auth_path(conn, :login))
+  end
+
   def callback(%{assigns: %{ueberauth_failure: _fails}}, _params) do
     {:error, :unauthorized}
   end
@@ -26,9 +30,5 @@ defmodule ConductorWeb.AuthController do
         |> UserAuth.login_user(user)
         |> redirect(to: "/admin")
     end
-  end
-
-  def delete(conn, _params) do
-    conn |> UserAuth.logout_user() |> redirect(to: Routes.auth_path(conn, :login))
   end
 end

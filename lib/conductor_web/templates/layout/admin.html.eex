@@ -4,14 +4,32 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Conductor</title>
+    <title>Conductor Admin</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/admin.css") %>"/>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/admin.js") %>"></script>
   </head>
   <body>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <nav role="navigation" class="fixed top-0 w-full flex border-b border-gray-10 px-8 py-2 items-center">
+      <div class="flex-initial">
+        <h1 class="font-sans text-3xl">Conductor</h1>
+      </div>
+      <div class="flex-1">
+
+      </div>
+      <div>
+        <%= link "Log out", to: Routes.auth_path(@conn, :logout) %>
+      </div>
+    </nav>
+
+    <main role="main" class="container mx-auto mt-24">
+      <%= if get_flash(@conn, :info) do %>
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <% end %>
+
+      <%= if get_flash(@conn, :error) do %>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <% end %>
+
       <%= @inner_content %>
     </main>
   </body>

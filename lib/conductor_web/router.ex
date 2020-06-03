@@ -15,16 +15,22 @@ defmodule ConductorWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug :put_layout, {ConductorWeb.LayoutView, "admin.html"}
+  end
+
   scope "/auth", ConductorWeb do
     pipe_through :browser
 
     get "/login", AuthController, :login
+    get "/logout", AuthController, :logout
+
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
   end
 
   scope "/admin", ConductorWeb.Admin, as: :admin do
-    pipe_through [:browser, :require_user]
+    pipe_through [:browser, :require_user, :admin]
 
     get "/", HomeController, :index
   end

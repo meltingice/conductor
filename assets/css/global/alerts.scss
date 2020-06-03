@@ -1,0 +1,16 @@
+.alert {
+  @apply font-sans rounded p-4;
+
+  &-danger {
+    @apply bg-status-danger-light border border-status-danger;
+  }
+
+  &-success {
+    @apply bg-status-success-light border border-status-success;
+  }
+
+  &-info,
+  &-neutral {
+    @apply bg-status-neutral-light border border-status-neutral;
+  }
+}
