@@ -7,5 +7,17 @@ defmodule ConductorWeb.RedirectController do
   end
 
   def show(conn, %{"code" => code}) do
+    Conductor.Repo.get_by(Conductor.Redirect, code: code)
+    |> case do
+      nil ->
+        conn
+        |> put_status(:not_found)
+        |> put_view(ConductorWeb.ErrorView)
+        |> render(:"404")
+
+      record ->
+        # TODO - record view
+        conn |> redirect(external: record.destination)
+    end
   end
 end
