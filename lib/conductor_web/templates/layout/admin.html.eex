@@ -11,7 +11,7 @@
   <body>
     <nav role="navigation" class="fixed top-0 w-full flex bg-gray-90 px-8 py-2 items-center">
       <div class="flex-initial">
-        <h1 class="font-sans text-3xl text-white">Conductor</h1>
+        <h1 class="font-sans text-3xl text-white"><%= link "Conductor", to: Routes.admin_home_path(@conn, :index) %></h1>
       </div>
       <div class="flex-1 flex items-center mx-10 text-white">
         <%= link "Redirects", to: Routes.admin_redirect_path(@conn, :index), class: "font-sans hover:underline" %>

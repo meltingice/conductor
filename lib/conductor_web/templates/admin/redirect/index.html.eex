@@ -1,0 +1,24 @@
+<div class="flex items-center justify-between">
+  <h1 class="font-serif text-4xl">Redirects</h1>
+  <div>
+    <%= link("New Redirect", to: Routes.admin_redirect_path(@conn, :new), class: "btn btn-black") %>
+  </div>
+</div>
+
+<hr class="border-gray-10 my-2">
+
+<%= for redirect <- @redirects do %>
+  <div class="border-b border-gray-10 py-4 flex items-center">
+    <div class="flex-1">
+      <p class="font-sans text-2xl">Redirect Name</p>
+      <p class="font-sans">/<%= redirect.code %> -> <%= redirect.destination %></p>
+    </div>
+    <div class="mx-6">
+      <p class="font-sans font-bold text-2xl"><%= view_count(redirect) %> views</p>
+    </div>
+    <div>
+      <%= link "Edit", to: Routes.admin_redirect_path(@conn, :edit, redirect.id), class: "btn btn-black mr-1" %>
+      <%= link "Delete", to: Routes.admin_redirect_path(@conn, :delete, redirect.id), class: "btn btn-danger", method: :delete %>
+    </div>
+  </div>
+<% end %>

@@ -45,7 +45,9 @@ defmodule Conductor.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:ueberauth_google, "~> 0.9"}
+      {:ueberauth_google, "~> 0.9"},
+      {:scrivener_ecto, "~> 2.0"},
+      {:number, "~> 1.0"}
     ]
   end
 
