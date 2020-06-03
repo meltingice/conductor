@@ -1,0 +1,6 @@
+<div class="absolute inset-0 flex items-center justify-center">
+  <div class="text-center">
+    <h1 class="font-serif text-4xl">Unauthorized</h1>
+    <p>You are not authorized to view that page.</p>
+  </div>
+</div>

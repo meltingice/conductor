@@ -20,6 +20,19 @@ defmodule ConductorWeb.Router do
     get "/:code", RedirectController, :show
   end
 
+  scope "/auth", ConductorWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
+  scope "/admin", ConductorWeb.Admin, as: :admin do
+    pipe_through :browser
+
+    get "/", HomeController, :index
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", ConductorWeb do
   #   pipe_through :api

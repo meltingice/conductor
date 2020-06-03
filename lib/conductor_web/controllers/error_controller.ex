@@ -7,4 +7,11 @@ defmodule ConductorWeb.ErrorController do
     |> put_view(ConductorWeb.ErrorView)
     |> render(:"404")
   end
+
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> put_view(ConductorWeb.ErrorView)
+    |> render(:"401")
+  end
 end
