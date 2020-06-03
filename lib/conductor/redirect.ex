@@ -14,7 +14,7 @@ defmodule Conductor.Redirect do
   @doc false
   def changeset(redirect, attrs) do
     redirect
-    |> cast(attrs, [:code, :destination, :views])
-    |> validate_required([:code, :destination])
+    |> cast(attrs, [:active, :code, :destination, :name, :views])
+    |> validate_required([:active, :code, :name, :destination])
   end
 end
