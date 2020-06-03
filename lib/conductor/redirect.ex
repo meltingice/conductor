@@ -4,8 +4,10 @@ defmodule Conductor.Redirect do
   import Ecto.Query
 
   schema "redirects" do
+    field :active, :boolean, default: true
     field :code, :string
     field :destination, :string
+    field :name, :string
     field :views, :integer, default: 0
   end
 
