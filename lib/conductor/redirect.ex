@@ -5,9 +5,7 @@ defmodule Conductor.Redirect do
   schema "redirects" do
     field :code, :string
     field :destination, :string
-    field :views, :integer
-
-    timestamps()
+    field :views, :integer, default: 0
   end
 
   @doc false
