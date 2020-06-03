@@ -16,8 +16,9 @@
       <div class="flex-1">
 
       </div>
-      <div>
-        <%= link "Log out", to: Routes.auth_path(@conn, :logout) %>
+      <div class="font-sans">
+        <b><%= current_user(@conn).first_name %> <%= current_user(@conn).last_name %></b>
+        <%= link "Log out", to: Routes.auth_path(@conn, :logout), class: 'ml-2 hover:underline' %>
       </div>
     </nav>
 

@@ -1,9 +1,10 @@
 defmodule Conductor.User do
   use Conductor.Schema
   import Ecto.Changeset
-  require Ecto.Query
+  import Ecto.Query
 
   alias Ueberauth.Auth
+  alias Conductor.Repo
 
   schema "users" do
     field :active, :boolean, default: false
@@ -16,9 +17,10 @@ defmodule Conductor.User do
 
   def from_auth(%Auth{provider: :google, info: info}) do
     Conductor.User
-    |> Ecto.Query.where(active: true, email: ^info.email)
-    |> Ecto.Query.first()
-    |> Conductor.Repo.one()
+    |> Conductor.User.active()
+    |> Conductor.User.for_email(info.email)
+    |> first()
+    |> Repo.one()
     |> case do
       nil ->
         {:error, "User not found or not active for login"}
@@ -26,6 +28,14 @@ defmodule Conductor.User do
       user ->
         {:ok, user}
     end
+  end
+
+  def active(query) do
+    query |> where(active: true)
+  end
+
+  def for_email(query, email) do
+    query |> where(email: ^email)
   end
 
   @doc false
