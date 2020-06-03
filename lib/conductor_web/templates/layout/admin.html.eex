@@ -9,14 +9,15 @@
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/admin.js") %>"></script>
   </head>
   <body>
-    <nav role="navigation" class="fixed top-0 w-full flex border-b border-gray-10 px-8 py-2 items-center">
+    <nav role="navigation" class="fixed top-0 w-full flex bg-gray-90 px-8 py-2 items-center">
       <div class="flex-initial">
-        <h1 class="font-sans text-3xl">Conductor</h1>
+        <h1 class="font-sans text-3xl text-white">Conductor</h1>
       </div>
-      <div class="flex-1">
-
+      <div class="flex-1 flex items-center mx-10 text-white">
+        <%= link "Redirects", to: Routes.admin_redirect_path(@conn, :index), class: "font-sans hover:underline" %>
+        <%= link "Users", to: Routes.admin_user_path(@conn, :index), class: "font-sans hover:underline ml-4" %>
       </div>
-      <div class="font-sans">
+      <div class="font-sans text-white">
         <b><%= current_user(@conn).first_name %> <%= current_user(@conn).last_name %></b>
         <%= link "Log out", to: Routes.auth_path(@conn, :logout), class: 'ml-2 hover:underline' %>
       </div>

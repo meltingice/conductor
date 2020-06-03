@@ -33,6 +33,8 @@ defmodule ConductorWeb.Router do
     pipe_through [:browser, :require_user, :admin]
 
     get "/", HomeController, :index
+    resources "/redirects", RedirectController
+    resources "/users", UserController
   end
 
   scope "/", ConductorWeb do
