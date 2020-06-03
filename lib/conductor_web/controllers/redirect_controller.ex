@@ -4,8 +4,14 @@ defmodule ConductorWeb.RedirectController do
   action_fallback ConductorWeb.ErrorController
 
   def index(conn, _params) do
-    # TODO - make this configurable?
-    redirect(conn, external: "https://www.hodinkee.com")
+    System.get_env("DEFAULT_REDIRECT")
+    |> case do
+      nil ->
+        {:error, :not_found}
+
+      destination ->
+        redirect(conn, external: destination)
+    end
   end
 
   def show(conn, %{"code" => code}) do
