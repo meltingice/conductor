@@ -18,7 +18,10 @@
         <%= link "Users", to: Routes.admin_user_path(@conn, :index), class: "font-sans hover:underline ml-4" %>
       </div>
       <div class="font-sans text-white">
-        <b><%= current_user(@conn).first_name %> <%= current_user(@conn).last_name %></b>
+        <%= link to: Routes.admin_user_path(@conn, :edit, current_user(@conn).id) do %>
+          <b><%= current_user(@conn).first_name %> <%= current_user(@conn).last_name %></b>
+        <% end %>
+
         <%= link "Log out", to: Routes.auth_path(@conn, :logout), class: 'ml-2 hover:underline' %>
       </div>
     </nav>
