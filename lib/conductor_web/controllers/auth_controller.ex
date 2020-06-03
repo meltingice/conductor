@@ -1,8 +1,14 @@
 defmodule ConductorWeb.AuthController do
   use ConductorWeb, :controller
+  alias ConductorWeb.UserAuth
+
   plug Ueberauth
 
   action_fallback ConductorWeb.ErrorController
+
+  def login(conn, _params) do
+    render(conn, "login.html")
+  end
 
   def callback(%{assigns: %{ueberauth_failure: _fails}}, _params) do
     {:error, :unauthorized}
@@ -17,9 +23,12 @@ defmodule ConductorWeb.AuthController do
       {:ok, %Conductor.User{} = user} ->
         conn
         |> put_flash(:info, "You are now logged in.")
-        |> put_session(:current_user, user)
-        |> configure_session(renew: true)
+        |> UserAuth.login_user(user)
         |> redirect(to: "/admin")
     end
+  end
+
+  def delete(conn, _params) do
+    conn |> UserAuth.logout_user() |> redirect(to: Routes.auth_path(conn, :login))
   end
 end

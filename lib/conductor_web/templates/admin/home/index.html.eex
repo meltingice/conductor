@@ -1,0 +1,2 @@
+<h1>Hello, admin!</h1>
+<%= current_user(@conn).email %>

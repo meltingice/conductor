@@ -1,0 +1,62 @@
+.btn {
+  @apply inline-block py-3 px-4 cursor-pointer rounded-full text-center;
+  @apply font-sans uppercase text-xs font-semibold tracking-wide leading-none;
+
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+  &-black {
+    @apply bg-black text-white border border-black;
+
+    &:hover {
+      @apply bg-gray-90;
+    }
+
+    &:disabled {
+      @apply bg-gray-60 cursor-not-allowed border-gray-60;
+    }
+  }
+
+  &-tint {
+    @apply bg-tint-80 text-gray-90;
+  }
+
+  &-white {
+    @apply bg-white text-gray-80 border border-gray-10;
+
+    &:hover {
+      @apply border-gray-40;
+    }
+  }
+
+  &-danger {
+    @apply bg-status-danger text-white;
+  }
+
+  &-outline {
+    @apply bg-transparent border;
+
+    &-black {
+      @apply text-gray-90 border-gray-90;
+    }
+
+    &-gray {
+      @apply border-gray-20 text-gray-40;
+    }
+  }
+
+  &-full {
+    @apply w-full;
+  }
+
+  &-thin {
+    @apply px-5 py-3;
+  }
+
+  &-sm {
+    @apply py-1 px-2;
+  }
+
+  &-lg {
+    @apply text-base py-4 px-8;
+  }
+}

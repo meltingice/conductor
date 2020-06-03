@@ -1,5 +1,5 @@
 defmodule Conductor.User do
-  use Ecto.Schema
+  use Conductor.Schema
   import Ecto.Changeset
   require Ecto.Query
 
@@ -15,7 +15,7 @@ defmodule Conductor.User do
   end
 
   def from_auth(%Auth{provider: :google, info: info}) do
-    User
+    Conductor.User
     |> Ecto.Query.where(active: true, email: ^info.email)
     |> Ecto.Query.first()
     |> Conductor.Repo.one()

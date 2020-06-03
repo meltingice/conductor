@@ -2,3 +2,5 @@
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
 import "../css/admin.scss";
+
+import "phoenix_html";

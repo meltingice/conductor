@@ -1,5 +1,6 @@
 defmodule ConductorWeb.Router do
   use ConductorWeb, :router
+  import ConductorWeb.UserAuth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -7,10 +8,25 @@ defmodule ConductorWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_user
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  scope "/auth", ConductorWeb do
+    pipe_through :browser
+
+    get "/login", AuthController, :login
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
+  scope "/admin", ConductorWeb.Admin, as: :admin do
+    pipe_through [:browser, :require_user]
+
+    get "/", HomeController, :index
   end
 
   scope "/", ConductorWeb do
@@ -18,19 +34,6 @@ defmodule ConductorWeb.Router do
 
     get "/", RedirectController, :index
     get "/:code", RedirectController, :show
-  end
-
-  scope "/auth", ConductorWeb do
-    pipe_through :browser
-
-    get "/:provider", AuthController, :request
-    get "/:provider/callback", AuthController, :callback
-  end
-
-  scope "/admin", ConductorWeb.Admin, as: :admin do
-    pipe_through :browser
-
-    get "/", HomeController, :index
   end
 
   # Other scopes may use custom stacks.

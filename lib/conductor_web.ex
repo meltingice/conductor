@@ -69,6 +69,7 @@ defmodule ConductorWeb do
       import ConductorWeb.ErrorHelpers
       import ConductorWeb.Gettext
       alias ConductorWeb.Router.Helpers, as: Routes
+      import ConductorWeb.UserAuth.Helpers
     end
   end
 
