@@ -1,5 +1,6 @@
 defmodule ConductorWeb.RedirectController do
   use ConductorWeb, :controller
+  alias Conductor.{Repo, Redirect}
 
   action_fallback ConductorWeb.ErrorController
 
@@ -15,7 +16,7 @@ defmodule ConductorWeb.RedirectController do
   end
 
   def show(conn, %{"code" => code}) do
-    Conductor.Repo.get_by(Conductor.Redirect, code: code)
+    Repo.get_by(Redirect, code: code)
     |> case do
       nil ->
         {:error, :not_found}

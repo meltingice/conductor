@@ -1,0 +1,3 @@
+<div class="mt-32">
+<%= @redirect.code %> -> <%= @redirect.destination %>
+</div>

@@ -24,6 +24,7 @@ defmodule ConductorWeb do
       import Plug.Conn
       import ConductorWeb.Gettext
       alias ConductorWeb.Router.Helpers, as: Routes
+      alias ConductorWeb.StrongParams
     end
   end
 
