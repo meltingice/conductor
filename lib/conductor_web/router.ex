@@ -8,6 +8,9 @@ defmodule ConductorWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :authenticate_user do
     plug :fetch_current_user
   end
 
@@ -30,7 +33,7 @@ defmodule ConductorWeb.Router do
   end
 
   scope "/admin", ConductorWeb.Admin, as: :admin do
-    pipe_through [:browser, :require_user, :admin]
+    pipe_through [:browser, :authenticate_user, :require_user, :admin]
 
     get "/", HomeController, :index
     resources "/redirects", RedirectController
