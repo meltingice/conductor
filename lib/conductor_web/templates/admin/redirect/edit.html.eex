@@ -1,8 +1,8 @@
-<h1 class="font-serif text-4xl">New Redirect</h1>
+<h1 class="font-serif text-4xl">Edit Redirect</h1>
 <hr class="border-gray-10 my-2">
 
 <div class="mx-auto max-w-lg">
   <%= render ConductorWeb.Admin.RedirectView, "form.html",
-      Map.merge(assigns, %{submit_text: "Create Redirect" })
+      Map.merge(assigns, %{submit_text: "Save Redirect" })
   %>
 </div>

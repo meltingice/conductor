@@ -15,7 +15,26 @@ defmodule ConductorWeb.Admin.RedirectController do
 
   def new(conn, _params) do
     changeset = Redirect.changeset(%Redirect{})
-    render(conn, "new.html", changeset: changeset)
+
+    render(conn, "new.html",
+      changeset: changeset,
+      action: Routes.admin_redirect_path(conn, :create)
+    )
+  end
+
+  def edit(conn, %{"id" => id}) do
+    redirect = Repo.get(Redirect, id)
+
+    if redirect do
+      changeset = Redirect.changeset(redirect)
+
+      render(conn, "edit.html",
+        changeset: changeset,
+        action: Routes.admin_redirect_path(conn, :update, redirect.id)
+      )
+    else
+      {:error, :not_found}
+    end
   end
 
   def show(conn, %{"id" => id}) do
@@ -39,7 +58,29 @@ defmodule ConductorWeb.Admin.RedirectController do
 
       {:error, changeset} ->
         conn
-        |> render("new.html", changeset: changeset)
+        |> render("new.html",
+          changeset: changeset,
+          action: Routes.admin_redirect_path(conn, :create)
+        )
+    end
+  end
+
+  def update(conn, %{"id" => id, "redirect" => params}) do
+    redirect = Repo.get(Redirect, id)
+    changeset = Redirect.changeset(redirect, redirect_params(params))
+
+    case Repo.update(changeset) do
+      {:ok, changeset} ->
+        conn
+        |> put_flash(:info, "The redirect has been updated.")
+        |> redirect(to: Routes.admin_redirect_path(conn, :show, redirect.id))
+
+      {:error, changeset} ->
+        conn
+        |> render("edit.html",
+          changeset: changeset,
+          action: Routes.admin_redirect_path(conn, :update, redirect.id)
+        )
     end
   end
 

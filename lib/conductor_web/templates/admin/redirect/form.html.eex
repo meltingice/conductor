@@ -1,0 +1,35 @@
+<%= form_for @changeset, @action, [class: "form"], fn f -> %>
+  <%= if @changeset.action && !@changeset.valid? do %>
+    <div class="alert alert-danger mt-6">
+      There were some errors when attempting to save. <%= full_error_messages(@changeset) |> humanize %>.
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label>Short Code</label>
+    <%= text_input f, :code, maxlength: 255 %>
+    <p class="form-help-text">This is the code that will be used in the short URL.</p>
+  </div>
+
+  <div class="form-group">
+    <label>Destination</label>
+    <%= text_input f, :destination %>
+    <p class="form-help-text">Where do you want the redirect to go?</p>
+  </div>
+
+  <div class="form-group">
+    <label>Name</label>
+    <%= text_input f, :name %>
+    <p class="form-help-text">A descriptive name for internal use only.</p>
+  </div>
+
+  <div class="form-group">
+    <label class="checkbox">
+      <%= checkbox f, :active %> Active?
+    </label>
+  </div>
+
+  <div class="text-center mt-6">
+    <%= submit @submit_text, class: "btn btn-black btn-lg" %>
+  </div>
+<% end %>
