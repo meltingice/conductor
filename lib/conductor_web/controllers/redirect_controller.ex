@@ -1,6 +1,6 @@
 defmodule ConductorWeb.RedirectController do
   use ConductorWeb, :controller
-  alias Conductor.{Repo, Redirect}
+  alias Conductor.{Cache, Repo, Redirect}
 
   action_fallback ConductorWeb.ErrorController
 
@@ -16,14 +16,22 @@ defmodule ConductorWeb.RedirectController do
   end
 
   def show(conn, %{"code" => code}) do
-    Repo.get_by(Redirect, code: code)
-    |> case do
-      nil ->
-        {:error, :not_found}
+    Cache.fetch(Redirect.cache_key(code), fn ->
+      case Repo.get_by(Redirect, code: code) do
+        %Redirect{} = redirect ->
+          {:ok, redirect.destination}
 
-      record ->
+        _ ->
+          {:error, :not_found}
+      end
+    end)
+    |> case do
+      {:ok, destination} ->
         # TODO - record view
-        conn |> redirect(external: record.destination)
+        conn |> redirect(external: destination)
+
+      err ->
+        err
     end
   end
 end

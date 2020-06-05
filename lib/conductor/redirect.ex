@@ -12,6 +12,10 @@ defmodule Conductor.Redirect do
     timestamps()
   end
 
+  def cache_key(code) do
+    "redirect/#{code}"
+  end
+
   @doc false
   def changeset(redirect, attrs \\ %{}) do
     redirect

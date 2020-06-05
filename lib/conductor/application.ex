@@ -14,7 +14,8 @@ defmodule Conductor.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Conductor.PubSub},
       # Start the Endpoint (http/https)
-      ConductorWeb.Endpoint
+      ConductorWeb.Endpoint,
+      {Conductor.Redix, name: Conductor.Redix}
       # Start a worker by calling: Conductor.Worker.start_link(arg)
       # {Conductor.Worker, arg}
     ]

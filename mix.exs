@@ -48,7 +48,8 @@ defmodule Conductor.MixProject do
       {:ueberauth_google, "~> 0.9"},
       {:scrivener_ecto, "~> 2.0"},
       {:number, "~> 1.0"},
-      {:calendar, "~> 1.0.0"}
+      {:calendar, "~> 1.0.0"},
+      {:redix, "~> 0.10.7"}
     ]
   end
 
