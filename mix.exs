@@ -48,7 +48,7 @@ defmodule Conductor.MixProject do
       {:ueberauth_google, "~> 0.9"},
       {:scrivener_ecto, "~> 2.0"},
       {:number, "~> 1.0"},
-      {:timex, "~> 3.5"}
+      {:calendar, "~> 1.0.0"}
     ]
   end
 

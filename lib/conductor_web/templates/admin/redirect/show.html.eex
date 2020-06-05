@@ -23,7 +23,7 @@
 
   <div class="mt-8">
     <p class="font-sans text-sm text-gray-40">
-      Created <%= Timex.format! @redirect.inserted_at, "{Mshort} {D}, {YYYY} {h12}:{m}{am}" %>
+      Created <%= Calendar.Strftime.strftime! @redirect.inserted_at, "%b %m, %Y %r" %>
     </p>
   </div>
 </div>
