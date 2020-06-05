@@ -67,7 +67,7 @@ defmodule ConductorWeb.Admin.UserController do
         |> put_flash(:info, "The user has been deleted.")
         |> redirect(to: Routes.admin_user_path(conn, :index))
 
-      {:error, changeset} ->
+      {:error, _} ->
         conn
         |> put_flash(:error, "There was an error deleting the user.")
         |> redirect(to: Routes.admin_user_path(conn, :index))

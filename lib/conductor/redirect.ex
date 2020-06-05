@@ -1,7 +1,6 @@
 defmodule Conductor.Redirect do
   use Conductor.Schema
   import Ecto.Changeset
-  import Ecto.Query
 
   schema "redirects" do
     field :active, :boolean, default: true

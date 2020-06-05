@@ -85,7 +85,7 @@ defmodule ConductorWeb.Admin.RedirectController do
         |> put_flash(:info, "The redirect has been deleted")
         |> redirect(to: Routes.admin_redirect_path(conn, :index))
 
-      {:error, changeset} ->
+      {:error, _} ->
         conn
         |> put_flash(:error, "There was an error deleting the redirect")
         |> redirect(to: Routes.admin_redirect_path(conn, :index))
