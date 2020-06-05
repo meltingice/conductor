@@ -23,7 +23,7 @@ defmodule ConductorWeb.Admin.RedirectController do
   end
 
   def edit(conn, %{"id" => id}) do
-    redirect = Repo.get(Redirect, id)
+    redirect = Repo.get!(Redirect, id)
 
     if redirect do
       changeset = Redirect.changeset(redirect)
@@ -38,7 +38,7 @@ defmodule ConductorWeb.Admin.RedirectController do
   end
 
   def show(conn, %{"id" => id}) do
-    redirect = Repo.get(Redirect, id)
+    redirect = Repo.get!(Redirect, id)
 
     if redirect do
       render(conn, "show.html", redirect: redirect)
@@ -66,11 +66,11 @@ defmodule ConductorWeb.Admin.RedirectController do
   end
 
   def update(conn, %{"id" => id, "redirect" => params}) do
-    redirect = Repo.get(Redirect, id)
+    redirect = Repo.get!(Redirect, id)
     changeset = Redirect.changeset(redirect, redirect_params(params))
 
     case Repo.update(changeset) do
-      {:ok, changeset} ->
+      {:ok, redirect} ->
         conn
         |> put_flash(:info, "The redirect has been updated.")
         |> redirect(to: Routes.admin_redirect_path(conn, :show, redirect.id))
@@ -81,6 +81,22 @@ defmodule ConductorWeb.Admin.RedirectController do
           changeset: changeset,
           action: Routes.admin_redirect_path(conn, :update, redirect.id)
         )
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    redirect = Repo.get!(Redirect, id)
+
+    case Repo.delete(redirect) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "The redirect has been deleted")
+        |> redirect(to: Routes.admin_redirect_path(conn, :index))
+
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "There was an error deleting the redirect")
+        |> redirect(to: Routes.admin_redirect_path(conn, :index))
     end
   end
 
