@@ -1,9 +1,5 @@
 <%= form_for @changeset, @action, [class: "form"], fn f -> %>
-  <%= if @changeset.action && !@changeset.valid? do %>
-    <div class="alert alert-danger mt-6">
-      There were some errors when attempting to save. <%= full_error_messages(@changeset) |> humanize %>.
-    </div>
-  <% end %>
+  <%= render ConductorWeb.Admin.SharedView, "errors.html", changeset: @changeset %>
 
   <div class="form-group">
     <label>Short Code</label>

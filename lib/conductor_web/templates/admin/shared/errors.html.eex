@@ -1,0 +1,5 @@
+<%= if @changeset.action && !@changeset.valid? do %>
+  <div class="alert alert-danger mt-6">
+    There were some errors when attempting to save. <%= full_error_messages(@changeset) |> humanize %>.
+  </div>
+<% end %>

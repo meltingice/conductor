@@ -1,0 +1,18 @@
+<div class="mt-32 max-w-lg border border-gray-10 rounded-lg p-8 mx-auto">
+  <div class="flex justify-between">
+    <div>
+      <h1 class="text-3xl leading-none"><%= full_name(@user) %></h1>
+      <p class="text-gray-60 leading-loose"><%= @user.email %></p>
+    </div>
+    <div>
+      <p class="font-sans font-bold uppercase text-sm">
+        <%= if @user.active, do: "Active", else: "Inactive" %>
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <%= link "Edit", to: Routes.admin_user_path(@conn, :edit, @user.id), class: "btn btn-black mr-1" %>
+    <%= link "Delete", to: Routes.admin_user_path(@conn, :delete, @user.id), method: :delete, class: "btn btn-danger" %>
+  </div>
+</div>

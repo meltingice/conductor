@@ -6,3 +6,18 @@
 </div>
 
 <hr class="border-gray-10 my-2">
+
+<%= for user <- @users do %>
+  <div class="flex items-center py-4 border-b border-gray-10">
+    <div class="flex-1">
+      <%= link to: Routes.admin_user_path(@conn, :show, user.id) do %>
+        <h2 class="font-sans text-2xl"><%= full_name(user) %></h2>
+        <p class="text-gray-60"><%= user.email %></p>
+      <% end %>
+    </div>
+    <div>
+      <%= link "Edit", to: Routes.admin_user_path(@conn, :edit, user.id), class: "btn btn-black mr-1" %>
+      <%= link "Delete", to: Routes.admin_user_path(@conn, :delete, user.id), method: :delete, class: "btn btn-danger" %>
+    </div>
+  </div>
+<% end %>

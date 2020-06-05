@@ -1,0 +1,30 @@
+<%= form_for @changeset, @action, [class: "form"], fn f -> %>
+  <%= render ConductorWeb.Admin.SharedView, "errors.html", changeset: @changeset %>
+
+  <div class="form-group">
+    <label>Email</label>
+    <%= text_input f, :email %>
+    <p class="form-help-text">Must be a Google account.</p>
+  </div>
+
+  <div class="form-group flex">
+    <div class="flex-1 mr-1">
+      <label>First name</label>
+      <%= text_input f, :first_name %>
+    </div>
+    <div class="flex-1 ml-1">
+      <label>Last name</label>
+      <%= text_input f, :last_name %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="checkbox">
+      <%= checkbox f, :active %> Active?
+    </label>
+  </div>
+
+  <div class="text-center mt-6">
+    <%= submit @submit_text, class: "btn btn-black btn-lg" %>
+  </div>
+<% end %>
