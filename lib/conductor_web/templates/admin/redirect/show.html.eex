@@ -1,3 +1,29 @@
-<div class="mt-32">
-<%= @redirect.code %> -> <%= @redirect.destination %>
+<div class="mt-32 max-w-lg border border-gray-10 rounded-lg p-8 mx-auto">
+  <div class="flex justify-between">
+    <div>
+      <h1 class="font-sans text-3xl leading-none"><%= @redirect.name %></h1>
+      <p class="font-mono text-xl mt-2">
+        /<%= @redirect.code %>
+      </p>
+      <p class="font-mono text-gray-60 break-all mt-2">
+        <%= link @redirect.destination, to: @redirect.destination, target: "_blank" %>
+      </p>
+    </div>
+    <div>
+      <p class="font-sans font-bold uppercase text-sm">
+        <%= if @redirect.active, do: "Active", else: "Inactive" %>
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <%= link "Edit", to: Routes.admin_redirect_path(@conn, :edit, @redirect.id), class: "btn btn-black mr-1" %>
+    <%= link "Delete", to: Routes.admin_redirect_path(@conn, :delete, @redirect.id), method: :delete, class: "btn btn-danger" %>
+  </div>
+
+  <div class="mt-8">
+    <p class="font-sans text-sm text-gray-40">
+      Created <%= Timex.format! @redirect.inserted_at, "{Mshort} {D}, {YYYY} {h12}:{m}{am}" %>
+    </p>
+  </div>
 </div>

@@ -15,4 +15,10 @@
     <%= link "Edit", to: Routes.admin_user_path(@conn, :edit, @user.id), class: "btn btn-black mr-1" %>
     <%= link "Delete", to: Routes.admin_user_path(@conn, :delete, @user.id), method: :delete, class: "btn btn-danger" %>
   </div>
+
+  <div class="mt-8">
+    <p class="font-sans text-sm text-gray-40">
+      Created <%= Timex.format! @user.inserted_at, "{Mshort} {D}, {YYYY} {h12}:{m}{am}" %>
+    </p>
+  </div>
 </div>

@@ -25,7 +25,7 @@ defmodule ConductorWeb.Admin.RedirectController do
     if redirect do
       changeset = Redirect.changeset(redirect)
 
-      render(conn, "edit.html", changeset: changeset)
+      render(conn, "edit.html", redirect: redirect, changeset: changeset)
     else
       {:error, :not_found}
     end

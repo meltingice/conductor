@@ -11,10 +11,13 @@
   <div class="border-b border-gray-10 py-4 flex items-center">
     <div class="flex-1 <%= if !redirect.active, do: "text-gray-60" %>">
       <p class="font-sans text-2xl">
-        <%= redirect.name %>
-        <%= if !redirect.active, do: " (Inactive)" %>
+        <%= link to: Routes.admin_redirect_path(@conn, :show, redirect.id) do %>
+          <%= redirect.name %>
+          <%= if !redirect.active, do: " (Inactive)" %>
+        <% end %>
       </p>
-      <p class="font-mono">/<%= redirect.code %> -> <%= redirect.destination %></p>
+      <p class="font-mono">/<%= redirect.code %></p>
+      <p class="font-mono text-gray-60 break-all"><%= redirect.destination %></p>
     </div>
     <div class="mx-6">
       <p class="font-sans font-bold text-2xl"><%= view_count(redirect) %> views</p>

@@ -47,7 +47,8 @@ defmodule Conductor.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth_google, "~> 0.9"},
       {:scrivener_ecto, "~> 2.0"},
-      {:number, "~> 1.0"}
+      {:number, "~> 1.0"},
+      {:timex, "~> 3.5"}
     ]
   end
 
