@@ -1,7 +1,7 @@
 defmodule ConductorWeb.Admin.RedirectController do
   use ConductorWeb, :controller
 
-  alias Conductor.{Repo, Redirect}
+  alias Conductor.{Cache, Repo, Redirect}
   import Ecto.Query
 
   def index(conn, params) do
@@ -64,6 +64,8 @@ defmodule ConductorWeb.Admin.RedirectController do
 
     case Repo.update(changeset) do
       {:ok, redirect} ->
+        Redirect.clear_cache(redirect)
+
         conn
         |> put_flash(:info, "The redirect has been updated.")
         |> redirect(to: Routes.admin_redirect_path(conn, :show, redirect.id))
@@ -81,6 +83,8 @@ defmodule ConductorWeb.Admin.RedirectController do
 
     case Repo.delete(redirect) do
       {:ok, _} ->
+        Redirect.clear_cache(redirect)
+
         conn
         |> put_flash(:info, "The redirect has been deleted")
         |> redirect(to: Routes.admin_redirect_path(conn, :index))

@@ -1,6 +1,7 @@
 defmodule Conductor.Redirect do
   use Conductor.Schema
   import Ecto.Changeset
+  alias Conductor.Cache
 
   schema "redirects" do
     field :active, :boolean, default: true
@@ -10,6 +11,10 @@ defmodule Conductor.Redirect do
     field :views, :integer, default: 0
 
     timestamps()
+  end
+
+  def clear_cache(%Conductor.Redirect{} = redirect) do
+    Cache.delete(cache_key(redirect.code))
   end
 
   def cache_key(code) do
