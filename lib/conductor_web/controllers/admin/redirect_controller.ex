@@ -16,10 +16,7 @@ defmodule ConductorWeb.Admin.RedirectController do
   def new(conn, _params) do
     changeset = Redirect.changeset(%Redirect{})
 
-    render(conn, "new.html",
-      changeset: changeset,
-      action: Routes.admin_redirect_path(conn, :create)
-    )
+    render(conn, "new.html", changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -28,10 +25,7 @@ defmodule ConductorWeb.Admin.RedirectController do
     if redirect do
       changeset = Redirect.changeset(redirect)
 
-      render(conn, "edit.html",
-        changeset: changeset,
-        action: Routes.admin_redirect_path(conn, :update, redirect.id)
-      )
+      render(conn, "edit.html", changeset: changeset)
     else
       {:error, :not_found}
     end
@@ -59,8 +53,7 @@ defmodule ConductorWeb.Admin.RedirectController do
       {:error, changeset} ->
         conn
         |> render("new.html",
-          changeset: changeset,
-          action: Routes.admin_redirect_path(conn, :create)
+          changeset: changeset
         )
     end
   end
@@ -78,8 +71,7 @@ defmodule ConductorWeb.Admin.RedirectController do
       {:error, changeset} ->
         conn
         |> render("edit.html",
-          changeset: changeset,
-          action: Routes.admin_redirect_path(conn, :update, redirect.id)
+          changeset: changeset
         )
     end
   end

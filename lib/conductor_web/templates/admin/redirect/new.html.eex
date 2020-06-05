@@ -3,6 +3,9 @@
 
 <div class="mx-auto max-w-lg">
   <%= render ConductorWeb.Admin.RedirectView, "form.html",
-      Map.merge(assigns, %{submit_text: "Create Redirect" })
+      Map.merge(assigns, %{
+        submit_text: "Create Redirect",
+        action: Routes.admin_redirect_path(@conn, :create)
+      })
   %>
 </div>
