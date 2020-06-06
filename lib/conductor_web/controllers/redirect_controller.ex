@@ -19,16 +19,18 @@ defmodule ConductorWeb.RedirectController do
     Cache.fetch(Redirect.cache_key(code), fn ->
       case Repo.get_by(Redirect, code: code) do
         %Redirect{} = redirect ->
-          {:ok, redirect.destination}
+          {:ok, redirect}
 
         _ ->
           {:error, :not_found}
       end
     end)
     |> case do
-      {:ok, destination} ->
+      {:ok, redirect} ->
         # TODO - record view
-        conn |> redirect(external: destination)
+        conn
+        |> Redirect.View.record(redirect)
+        |> redirect(external: redirect["destination"])
 
       err ->
         err

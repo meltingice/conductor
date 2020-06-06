@@ -3,6 +3,7 @@ defmodule Conductor.Redirect do
   import Ecto.Changeset
   alias Conductor.Cache
 
+  @derive {Jason.Encoder, only: [:id, :code, :destination, :views_count]}
   schema "redirects" do
     field :active, :boolean, default: true
     field :code, :string
@@ -20,7 +21,7 @@ defmodule Conductor.Redirect do
   end
 
   def cache_key(code) do
-    "redirect/#{code}"
+    "redirect/v2/#{code}"
   end
 
   @doc false
