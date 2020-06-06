@@ -1,7 +1,7 @@
 defmodule Conductor.Redirect do
   use Conductor.Schema
   import Ecto.Changeset
-  alias Conductor.Cache
+  alias Conductor.{Cache, Repo}
 
   @derive {Jason.Encoder, only: [:id, :code, :destination, :views_count]}
   schema "redirects" do
@@ -14,6 +14,10 @@ defmodule Conductor.Redirect do
     has_many :views, Conductor.Redirect.View
 
     timestamps()
+  end
+
+  def view_count(%Conductor.Redirect{} = redirect) do
+    redirect |> Ecto.assoc(:views) |> Repo.aggregate(:count, :id)
   end
 
   def clear_cache(%Conductor.Redirect{} = redirect) do

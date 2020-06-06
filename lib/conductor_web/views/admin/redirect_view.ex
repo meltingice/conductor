@@ -1,7 +1,8 @@
 defmodule ConductorWeb.Admin.RedirectView do
   use ConductorWeb, :view
+  alias Conductor.Redirect
 
-  def view_count(redirect) do
-    Number.Delimit.number_to_delimited(redirect.views_count, precision: 0)
+  def delimited_view_count(view_count) do
+    Number.Delimit.number_to_delimited(view_count, precision: 0)
   end
 end
