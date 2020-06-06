@@ -8,7 +8,9 @@ defmodule Conductor.Redirect do
     field :code, :string
     field :destination, :string
     field :name, :string
-    field :views, :integer, default: 0
+    field :views_count, :integer, default: 0
+
+    has_many :views, Conductor.Redirect.View
 
     timestamps()
   end
