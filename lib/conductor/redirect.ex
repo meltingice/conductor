@@ -31,7 +31,7 @@ defmodule Conductor.Redirect do
   @doc false
   def changeset(redirect, attrs \\ %{}) do
     redirect
-    |> cast(attrs, [:active, :code, :destination, :name, :views])
+    |> cast(attrs, [:active, :code, :destination, :name, :views_count])
     |> validate_required([:active, :code, :name, :destination])
     |> unique_constraint(:code)
   end
