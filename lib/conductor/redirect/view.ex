@@ -21,9 +21,18 @@ defmodule Conductor.Redirect.View do
   end
 
   def record(conn, redirect_id) when is_binary(redirect_id) do
+    ip_address =
+      case Plug.Conn.get_req_header(conn, "x-forwarded-for") |> List.first() do
+        nil ->
+          remote_ip_to_string(conn.remote_ip)
+
+        forwarded_for ->
+          forwarded_for |> String.split(",") |> List.first() |> String.trim()
+      end
+
     %Conductor.Redirect.View{
       redirect_id: redirect_id,
-      ip_address: remote_ip_to_string(conn.remote_ip),
+      ip_address: ip_address,
       user_agent: Plug.Conn.get_req_header(conn, "user-agent") |> List.first()
     }
     |> Repo.insert()
