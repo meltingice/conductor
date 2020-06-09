@@ -20,7 +20,7 @@ defmodule Conductor.MixProject do
   def application do
     [
       mod: {Conductor.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
