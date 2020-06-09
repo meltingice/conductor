@@ -39,6 +39,6 @@ defmodule Conductor.Redirect.View do
   end
 
   defp remote_ip_to_string(remote_ip) do
-    remote_ip |> Tuple.to_list() |> Enum.join(".")
+    remote_ip |> :inet_parse.ntoa() |> to_string()
   end
 end
